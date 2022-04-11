@@ -1,0 +1,11 @@
+{
+  "name": "js-helpertools",
+  "version": "1.0.0",
+  "description": "Easy Tools for developers. It includes many useful javascript function for developers",
+  "main": "NewTools.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Mayur Hiwale (Zerapium)",
+  "license": "MIT"
+}
