@@ -1,4 +1,4 @@
-const fs = require('fs/promises');
+//const fs = require('fs/promises'); deprecated to newer versions
 const https = require('https');
 const path = require('path');
 const url = require('url');
@@ -743,6 +743,19 @@ class Tools {
 		return combinations;
 	}
 
+
+	generateKey(bit,includeSpecialCharacter) {
+			var text = "";
+			var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+		  if(includeSpecialCharacter) possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+<>?{}|/";
+			for (var i = 0; i < bit; i++)
+			  text += possible.charAt(this.random(possible.length));
+		  
+			return text;
+		  
+	}
+
+
 	getRunTime(func,p1,p2,p3) {
 		if(!func || typeof func != "function" ) return console.log("Tools.getRunTime() recieved invalid callback function");
 		let start = performance.now();
@@ -783,7 +796,6 @@ class Tools {
 			.then(() => fs.rename(tempFilepath, filepath)); // eslint-disable-line @typescript-eslint/promise-function-async
 	}
 }
-
 
 
 module.exports = new Tools();
