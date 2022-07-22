@@ -250,6 +250,15 @@ class Tools {
 		return this.shuffle(array, prng)[0];
 	}
 
+
+	isLucky(accuracy) {
+		// Accuracy is between 0-100
+		if(parseInt(accuracy) >= this.random(100) && accuracy != 0) return true;
+		return false;
+
+	}
+
+
 	shuffle(array, prng) {
 		const shuffled = array.slice();
 
@@ -744,24 +753,85 @@ class Tools {
 	}
 
 
-	generateKey(bit,includeSpecialCharacter) {
-			var text = "";
-			var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-		  if(includeSpecialCharacter) possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+<>?{}|/";
-			for (var i = 0; i < bit; i++)
-			  text += possible.charAt(this.random(possible.length));
-		  
-			return text;
-		  
+	generateKey(bit, includeSpecialCharacter) {
+		var text = "";
+		var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+		if (includeSpecialCharacter) possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+<>?{}|/";
+		for (var i = 0; i < bit; i++)
+			text += possible.charAt(this.random(possible.length));
+
+		return text;
+
 	}
 
 
-	getRunTime(func,p1,p2,p3) {
-		if(!func || typeof func != "function" ) return console.log("Tools.getRunTime() recieved invalid callback function");
+	getRunTime(func, p1, p2, p3) {
+		if (!func || typeof func != "function") return console.log("Tools.getRunTime() recieved invalid callback function");
 		let start = performance.now();
-		func(p1,p2,p3);
+		func(p1, p2, p3);
 		let end = performance.now();
 		return (end - start) + "ms";
+	}
+
+	 async makePostRequest(to, data) {
+
+		const axios = require('axios')
+
+		let res = await axios.post(to, data);
+		return res.data;
+	 }
+		
+
+		/*
+		const https = require('https')
+		let options = {};
+		if (method == "GET") {
+			options = {
+				hostname: host,
+				port: 443,
+				path: path,
+				method: method
+			}
+		}
+		else {
+			 options = {
+				hostname: host,
+				port: 443,
+				path: path,
+				method: method,
+				headers: {
+					'Content-Type': 'application/json',
+				}
+			}
+
+		}
+
+		const req =  https.request(options, res => {
+			console.log(`statusCode: ${res.statusCode}`)
+
+			res.on('data', d => {
+				return console.log(d);
+			});
+		})
+
+		req.on('error', error => {
+			return error;
+		})
+		if (data) req.write(JSON.stringify(data));
+		req.end()
+*/
+	
+
+	async encryptOverAPI(text, strong) {
+
+		let data =  {text : text,secure : strong};
+		try {
+		let result =  await this.makePostRequest("https://secureme-encrypt.glitch.me/encrypt",data);
+		return result;
+		} catch(e) {
+			throw e;
+		}
+		
 	}
 
 
