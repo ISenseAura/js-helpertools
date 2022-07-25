@@ -1,6 +1,6 @@
 {
   "name": "js-helpertools",
-  "version": "1.4.5",
+  "version": "1.4.6",
   "description": "Easy Tools for developers. It includes many useful javascript function for developers",
   "main": "NewTools.js",
   "scripts": {
