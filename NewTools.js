@@ -497,6 +497,9 @@ class Tools {
 	 * options.human = true will reports hours human-readable
 	 */
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+
+
+
 	toTimestampString(date, options) {
 		const human = options && options.human ? true : false;
 		let parts = [date.getFullYear(), date.getMonth() + 1, date.getDate(), date.getHours(), date.getMinutes(),
@@ -539,6 +542,18 @@ class Tools {
 		}
 		return this.joinList(durationString);
 	}
+
+
+	expiresIn(finalDate,date) {
+
+		if(date) {
+			return (finalDate.getTime() - date.getTime());
+		}
+		else {
+			return (finalDate.getTime() - new Date().getTime());
+		}
+	}
+
 
 	getLastDayOfMonth(date) {
 		const month = date.getMonth() + 1;
