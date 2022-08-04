@@ -546,11 +546,15 @@ class Tools {
 
 	expiresIn(finalDate,date) {
 
+		if(typeof finalDate != typeof 2) finalDate = finalDate.getTime();
 		if(date) {
-			return (finalDate.getTime() - date.getTime());
+			if(typeof date != typeof 2) date = date.getTime();
+			if(finalDate < date) return false;
+			return (finalDate - date);
 		}
 		else {
-			return (finalDate.getTime() - new Date().getTime());
+			if(finalDate < new Date().getTime()) return false;
+			return (finalDate - new Date().getTime());
 		}
 	}
 
